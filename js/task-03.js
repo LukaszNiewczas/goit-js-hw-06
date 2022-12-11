@@ -13,13 +13,13 @@ const images = [
   },
 ];
 
-let listOfImages = document.querySelector(".gallery");
-if (listOfImages && listOfImages.classList) {
-  listOfImages.classList.add("container");
-}
-images.forEach((imageItem) => {
-  listOfImages.insertAdjacentHTML(
-    "beforeend",
-    `<li style="padding: 50px; list-style-type: none; display: inline;" ><img height="200" width="300" src="${imageItem.url}" alt="${imageItem.alt} "style="border: solid blue 5px"/></li>`
-  );
-});
+document.querySelector(".gallery").append(
+  ...images.map(({ url, alt }) => {
+    const listItem = document.createElement("li");
+    const image = document.createElement("img");
+    image.alt = alt;
+    image.src = url;
+    listItem.append(image);
+    return listItem;
+  })
+);
